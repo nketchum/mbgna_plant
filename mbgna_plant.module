@@ -1,0 +1,92 @@
+<?php
+
+/**
+ * @file
+ * Provides a plant entity type.
+ */
+
+use Drupal\Core\Render\Element;
+use Drupal\mbgna_plant\Entity\Plant;
+use Drupal\user\UserInterface;
+
+/**
+ * Implements hook_theme().
+ */
+function mbgna_plant_theme() {
+  return [
+    'plant' => [
+      'render element' => 'elements',
+    ],
+  ];
+}
+
+/**
+ * Prepares variables for plant templates.
+ *
+ * Default template: plant.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - elements: An associative array containing the plant information and any
+ *     fields attached to the entity.
+ *   - attributes: HTML attributes for the containing element.
+ */
+function template_preprocess_plant(array &$variables) {
+  $variables['view_mode'] = $variables['elements']['#view_mode'];
+  foreach (Element::children($variables['elements']) as $key) {
+    $variables['content'][$key] = $variables['elements'][$key];
+  }
+}
+
+/**
+ * Implements hook_user_cancel().
+ */
+function mbgna_plant_user_cancel($edit, UserInterface $account, $method) {
+  switch ($method) {
+    case 'user_cancel_block_unpublish':
+      // Unpublish plants.
+      $storage = \Drupal::entityTypeManager()->getStorage('plant');
+      $plant_ids = $storage->getQuery()
+        ->condition('uid', $account->id())
+        ->condition('status', 1)
+        ->execute();
+      foreach ($storage->loadMultiple($plant_ids) as $plant) {
+        $plant->set('status', FALSE);
+        $plant->save();
+      }
+      break;
+
+    case 'user_cancel_reassign':
+      // Anonymize plants.
+      $storage = \Drupal::entityTypeManager()->getStorage('plant');
+      $plant_ids = $storage->getQuery()
+        ->condition('uid', $account->id())
+        ->execute();
+      foreach ($storage->loadMultiple($plant_ids) as $plant) {
+        $plant->setOwnerId(0);
+        $plant->save();
+      }
+      break;
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_predelete() for user entities.
+ */
+function mbgna_plant_user_predelete(UserInterface $account) {
+  // Delete plants.
+  $storage = \Drupal::entityTypeManager()->getStorage('plant');
+  $plant_ids = $storage->getQuery()
+    ->condition('uid', $account->id())
+    ->execute();
+  $plants = $storage->loadMultiple($plant_ids);
+  $storage->delete($plants);
+  // Delete old revisions.
+  $plant_ids = $storage->getQuery()
+    ->allRevisions()
+    ->condition('uid', $account->id())
+    ->execute();
+  foreach (array_keys($plant_ids) as $revision_id) {
+    $storage->deleteRevision($revision_id);
+  }
+}

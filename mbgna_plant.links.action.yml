@@ -1,0 +1,11 @@
+plant.type_add:
+  title: 'Add plant type'
+  route_name: entity.plant_type.add_form
+  appears_on:
+    - entity.plant_type.collection
+
+plant.add_page:
+  title: 'Add plant'
+  route_name: entity.plant.add_page
+  appears_on:
+    - entity.plant.collection

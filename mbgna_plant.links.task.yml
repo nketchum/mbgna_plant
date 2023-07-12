@@ -1,0 +1,26 @@
+entity.plant.view:
+  title: 'View'
+  route_name: entity.plant.canonical
+  base_route: entity.plant.canonical
+entity.plant.edit_form:
+  title: 'Edit'
+  route_name: entity.plant.edit_form
+  base_route: entity.plant.canonical
+entity.plant.delete_form:
+  title: 'Delete'
+  route_name: entity.plant.delete_form
+  base_route: entity.plant.canonical
+  weight: 10
+entity.plant.collection:
+  title: 'Plants'
+  route_name: entity.plant.collection
+  base_route: system.admin_content
+  weight: 10
+entity.plant_type.edit_form:
+  title: 'Edit'
+  route_name: entity.plant_type.edit_form
+  base_route: entity.plant_type.edit_form
+entity.plant_type.collection:
+  title: 'List'
+  route_name: entity.plant_type.collection
+  base_route: entity.plant_type.collection

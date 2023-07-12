@@ -1,0 +1,5 @@
+entity.plant_type.collection:
+  title: 'Plant types'
+  description: 'Manage and CRUD actions on Plant type.'
+  parent: system.admin_structure
+  route_name: entity.plant_type.collection
