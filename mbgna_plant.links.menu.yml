@@ -3,3 +3,9 @@ entity.plant_type.collection:
   description: 'Manage and CRUD actions on Plant type.'
   parent: system.admin_structure
   route_name: entity.plant_type.collection
+
+entity.plant.collection:
+  title: 'Plants'
+  route_name: view.plants.page_1
+  description: 'Browse plant listings'
+  parent: system.admin_content
