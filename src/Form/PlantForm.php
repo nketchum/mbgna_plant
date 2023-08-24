@@ -18,7 +18,6 @@ class PlantForm extends ContentEntityForm {
 
     $entity = $this->getEntity();
 
-    $message_arguments = ['%label' => $entity->toLink()->toString()];
     $logger_arguments = [
       '%label' => $entity->label(),
       'link' => $entity->toLink($this->t('View'))->toString(),
@@ -26,12 +25,12 @@ class PlantForm extends ContentEntityForm {
 
     switch ($result) {
       case SAVED_NEW:
-        $this->messenger()->addStatus($this->t('New plant %label has been created.', $message_arguments));
+        $this->messenger()->addStatus($this->t('New plant %label has been created.'));
         $this->logger('mbgna_plant')->notice('Created new plant %label', $logger_arguments);
         break;
 
       case SAVED_UPDATED:
-        $this->messenger()->addStatus($this->t('The plant %label has been updated.', $message_arguments));
+        $this->messenger()->addStatus($this->t('The plant %label has been updated.'));
         $this->logger('mbgna_plant')->notice('Updated plant %label.', $logger_arguments);
         break;
     }

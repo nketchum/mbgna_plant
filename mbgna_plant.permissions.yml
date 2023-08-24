@@ -2,6 +2,8 @@ administer plant types:
   title: 'Administer plant types'
   description: 'Maintain types of plants.'
   restrict access: true
+access plant overview:
+  title: Access the Plant overview page
 delete plant:
   title: Delete plant
 create plant:

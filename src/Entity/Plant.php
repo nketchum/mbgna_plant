@@ -110,7 +110,7 @@ class Plant extends RevisionableContentEntityBase implements PlantInterface {
       ->setRevisionable(TRUE)
       ->setLabel(t('Status'))
       ->setDefaultValue(TRUE)
-      ->setSetting('on_label', 'Enabled')
+      ->setSetting('on_label', 'Published')
       ->setDisplayOptions('form', [
         'type' => 'boolean_checkbox',
         'settings' => [

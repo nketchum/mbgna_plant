@@ -6,6 +6,6 @@ entity.plant_type.collection:
 
 entity.plant.collection:
   title: 'Plants'
-  route_name: view.plants.page_1
+  route_name: view.plant.page_1
   description: 'Browse plant listings'
   parent: system.admin_content
