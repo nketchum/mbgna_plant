@@ -5,9 +5,11 @@
  * Provides a plant entity type.
  */
 
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
 use Drupal\mbgna_plant\Entity\Plant;
 use Drupal\user\UserInterface;
+use Drupal\views\Views;
 
 /**
  * Implements hook_theme().
@@ -112,3 +114,26 @@ function mbgna_plant_theme_suggestions_plant(array $variables) {
 //     $storage->deleteRevision($revision_id);
 //   }
 // }
+
+/**
+ * Implements hook_form_FORM_ID_alter()
+ */
+function mbgna_plant_form_views_exposed_form_alter(array &$form, FormStateInterface $form_state, $form_id) {
+  $view = $form_state->getStorage('view');
+
+  // Peonies
+  if ($view['view']->id() == 'plant' && $view['view']->current_display == 'block_4') {
+    $form['form']['#options']['All'] = t('Choose a form...');
+    $form['season']['#options']['All'] = t('Choose a season...');
+    $form['cultivar']['#options']['All'] = t('Choose a cultivar...');
+    $form['country']['#options']['All'] = t('Choose an origin...');
+  }
+
+  // Bonsai
+  if ($view['view']->id() == 'plant' && $view['view']->current_display == 'block_2') {
+    $form['common_name']['#options']['All'] = t('Choose a common name...');
+    $form['style']['#options']['All'] = t('Choose a style...');
+    $form['genus']['#options']['All'] = t('Choose a genus...');
+    $form['species']['#options']['All'] = t('Choose a species...');
+  }
+}
