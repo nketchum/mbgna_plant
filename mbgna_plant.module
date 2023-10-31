@@ -63,59 +63,6 @@ function mbgna_plant_theme_suggestions_plant(array $variables) {
 }
 
 /**
- * Implements hook_user_cancel().
- */
-// function mbgna_plant_user_cancel($edit, UserInterface $account, $method) {
-//   switch ($method) {
-//     case 'user_cancel_block_unpublish':
-//       // Unpublish plants.
-//       $storage = \Drupal::entityTypeManager()->getStorage('plant');
-//       $plant_ids = $storage->getQuery()
-//         ->condition('uid', $account->id())
-//         ->condition('status', 1)
-//         ->execute();
-//       foreach ($storage->loadMultiple($plant_ids) as $plant) {
-//         $plant->set('status', FALSE);
-//         $plant->save();
-//       }
-//       break;
-
-//     case 'user_cancel_reassign':
-//       // Anonymize plants.
-//       $storage = \Drupal::entityTypeManager()->getStorage('plant');
-//       $plant_ids = $storage->getQuery()
-//         ->condition('uid', $account->id())
-//         ->execute();
-//       foreach ($storage->loadMultiple($plant_ids) as $plant) {
-//         $plant->setOwnerId(0);
-//         $plant->save();
-//       }
-//       break;
-//   }
-// }
-
-/**
- * Implements hook_ENTITY_TYPE_predelete() for user entities.
- */
-// function mbgna_plant_user_predelete(UserInterface $account) {
-//   // Delete plants.
-//   $storage = \Drupal::entityTypeManager()->getStorage('plant');
-//   $plant_ids = $storage->getQuery()
-//     ->condition('uid', $account->id())
-//     ->execute();
-//   $plants = $storage->loadMultiple($plant_ids);
-//   $storage->delete($plants);
-//   // Delete old revisions.
-//   $plant_ids = $storage->getQuery()
-//     ->allRevisions()
-//     ->condition('uid', $account->id())
-//     ->execute();
-//   foreach (array_keys($plant_ids) as $revision_id) {
-//     $storage->deleteRevision($revision_id);
-//   }
-// }
-
-/**
  * Implements hook_form_FORM_ID_alter()
  */
 function mbgna_plant_form_views_exposed_form_alter(array &$form, FormStateInterface $form_state, $form_id) {
