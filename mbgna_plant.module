@@ -36,6 +36,7 @@ function mbgna_plant_theme() {
 function template_preprocess_plant(array &$variables) {
   $plant = $variables['elements']['#plant'];
   if ($plant) {
+    $variables['plant_id'] = $plant->id();
     $variables['url'] = $plant->toUrl('canonical')->toString();
     $variables['bundle'] = $plant->bundle();
     $variables['status'] = $plant->status->getString();
