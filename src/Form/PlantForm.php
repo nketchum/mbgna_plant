@@ -25,12 +25,12 @@ class PlantForm extends ContentEntityForm {
 
     switch ($result) {
       case SAVED_NEW:
-        $this->messenger()->addStatus($this->t('New plant %label has been created.'));
+        $this->messenger()->addStatus($this->t('Plant created.'));
         $this->logger('mbgna_plant')->notice('Created new plant %label', $logger_arguments);
         break;
 
       case SAVED_UPDATED:
-        $this->messenger()->addStatus($this->t('The plant %label has been updated.'));
+        $this->messenger()->addStatus($this->t('Plant updated.'));
         $this->logger('mbgna_plant')->notice('Updated plant %label.', $logger_arguments);
         break;
     }
